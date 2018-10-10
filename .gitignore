@@ -17,6 +17,7 @@ Gemfile.lock
 /test/version_tmp/
 /tmp/
 /bundle/
+/.bundle
 
 ### Atom ###
 .ftpconfig

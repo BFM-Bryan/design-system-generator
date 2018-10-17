@@ -1,5 +1,5 @@
 ---
-layout: category
+layout: docs/category
 title: Components
 group: components
 permalink: /components/

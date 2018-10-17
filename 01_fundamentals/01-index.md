@@ -1,5 +1,5 @@
 ---
-layout: category
+layout: docs/category
 title: Fundamentals
 group: fundamentals
 permalink: /fundamentals/

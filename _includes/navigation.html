@@ -1,0 +1,80 @@
+<nav class="docs-primary-nav" role="navigation">
+  <ul class="docs-primary-nav__list" role="tablist" aria-multiselectable="true">
+  {% assign index = site.html_pages | sort:"group" %}
+  {% for node in index %}
+
+  {% if node.layout == 'landing' %}
+
+  {% assign group = node.group %}
+
+  {% case group %}
+    {% when null %}
+    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
+      <a href="{{ node.url }}" class="docs-primary-nav__link" role="button" tabindex="0" aria-expanded="false">
+        <span class="docs-primary-nav__text">{{ node.title }}</span>
+      </a>
+    </li>
+
+    {% when 'guidelines' %}
+    <li>{{ node.title }}<br><small>{{ node.name }} | {{ node.layout }} - {{ node.group }} </small></li>
+
+  {% endcase %}
+
+  {% endif %}
+
+
+
+
+  <!-- {% assign layout = node.layout %}
+
+    {% case layout %}
+
+    {% when 'landing' %}
+    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
+      <a href="#" class="docs-primary-nav__link" role="button" tabindex="0" aria-expanded="false">
+        <span class="docs-primary-nav__text">{{ node.title }}</span>
+      </a>
+    </li>
+
+    {% when 'component-category' %}
+    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
+      <a href="#" class="docs-primary-nav__link {% if node.group %}docs-primary-nav__link--has-children js-nav-dropdown-trigger{% endif %}">
+        <span class="docs-primary-nav__text">{{ node.title }}</span>
+        {% if node.group %}
+        <svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
+          <use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
+        </svg>
+        {% endif %}
+      </a>
+
+      {% if node.group == 'component'%}
+      <ul>
+        <li>
+          <a href="#" class="docs-primary-nav__link {% if node.group %}docs-primary-nav__link--has-children js-nav-dropdown-trigger{% endif %}">
+            <span class="docs-primary-nav__text">{{ node.title }}</span>
+            {% if node.group %}
+            <svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
+              <use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
+            </svg>
+            {% endif %}
+          </a>
+        </li>
+      </ul>
+      {% endif %}
+
+    </li>
+
+    {% when 'page' %}
+    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
+      <a href="#" class="docs-primary-nav__link" role="button" tabindex="0" aria-expanded="false">
+        <span class="docs-primary-nav__text">{{ node.title }}</span>
+      </a>
+    </li>
+
+    {% else %}
+
+    {% endcase %} -->
+
+  {% endfor %}
+  </ul>
+</nav>

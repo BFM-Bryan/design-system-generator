@@ -1,80 +1,165 @@
 <nav class="docs-primary-nav" role="navigation">
-  <ul class="docs-primary-nav__list" role="tablist" aria-multiselectable="true">
-  {% assign index = site.html_pages | sort:"group" %}
-  {% for node in index %}
-
-  {% if node.layout == 'landing' %}
-
-  {% assign group = node.group %}
-
-  {% case group %}
-    {% when null %}
-    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
-      <a href="{{ node.url }}" class="docs-primary-nav__link" role="button" tabindex="0" aria-expanded="false">
-        <span class="docs-primary-nav__text">{{ node.title }}</span>
-      </a>
-    </li>
-
-    {% when 'guidelines' %}
-    <li>{{ node.title }}<br><small>{{ node.name }} | {{ node.layout }} - {{ node.group }} </small></li>
-
-  {% endcase %}
-
-  {% endif %}
-
-
-
-
-  <!-- {% assign layout = node.layout %}
-
-    {% case layout %}
-
-    {% when 'landing' %}
-    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
-      <a href="#" class="docs-primary-nav__link" role="button" tabindex="0" aria-expanded="false">
-        <span class="docs-primary-nav__text">{{ node.title }}</span>
-      </a>
-    </li>
-
-    {% when 'component-category' %}
-    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
-      <a href="#" class="docs-primary-nav__link {% if node.group %}docs-primary-nav__link--has-children js-nav-dropdown-trigger{% endif %}">
-        <span class="docs-primary-nav__text">{{ node.title }}</span>
-        {% if node.group %}
-        <svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
-          <use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
-        </svg>
-        {% endif %}
-      </a>
-
-      {% if node.group == 'component'%}
-      <ul>
-        <li>
-          <a href="#" class="docs-primary-nav__link {% if node.group %}docs-primary-nav__link--has-children js-nav-dropdown-trigger{% endif %}">
-            <span class="docs-primary-nav__text">{{ node.title }}</span>
-            {% if node.group %}
-            <svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
-              <use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
-            </svg>
+	<ul class="docs-primary-nav__list js-nav-panel" role="tablist" aria-multiselectable="true">
+  	<li class="docs-primary-nav__item">
+  		<a href="{{ '/getting-started' | prepend: site.baseurl }}" class="docs-primary-nav__link {% if page.url == '/getting-started.html' %}is-active is-current{% endif %}">
+  			<span class="docs-primary-nav__text">Getting started</span>
+  		</a>
+  	</li>
+		<li class="docs-primary-nav__item {% if page.url contains '/guidelines/' %}is-active{% endif %}">
+			<a class="docs-primary-nav__link {% if page.url contains '/guidelines/' %} is-active is-current{% endif %}" href="{{ '/guidelines/' | prepend: site.baseurl }}">
+				<span class="docs-primary-nav__text">Guidelines</span>
+				<svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
+					<use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
+				</svg>
+			</a>
+			<ul class="docs-primary-nav__sublist js-nav-dropdownn {% if page.url contains '/guidelines/' %} is-active{% endif %}">
+		  {% for node in site.pages %}
+				{% if node.group == "guidelines" %}
+				<li class="docs-primary-nav__subitem">
+					<a class="docs-primary-nav__link {% if node.url == page.url %}is-active is-current{% endif %}" href="{{ node.url | prepend: site.baseurl }}">
+            {% if node.title == "Guidelines" %}
+            <span class="docs-primary-nav__text">Overview</span>
+            {% else %}
+            {{ node.title }}
             {% endif %}
-          </a>
-        </li>
-      </ul>
-      {% endif %}
+					</a>
+				</li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+		</li>
 
-    </li>
+		<li class="docs-primary-nav__item {% if page.url contains '/styles' %}is-active{% endif %}">
+			<a href="{{ "/styles/index.html" | prepend: site.baseurl }}" class="docs-primary-nav__link js-nav-dropdown-trigger {% if page.url contains '/styles' %}is-active  is-current{% endif %}">
+				<span class="docs-primary-nav__text">Styles</span>
+				<svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
+					<use href="{{ '/icons.svg#chevron-right' | prepend: site.baseurl }}"></use>
+				</svg>
+			</a>
+			<ul class="docs-primary-nav__sublist js-nav-dropdown {% if page.url contains '/styles' %}is-active{% endif %}">
+			{% for node in site.pages %}
+				{% if node.title %}
+					{% if node.group == "styles" %}
+					<li class="docs-primary-nav__subitem">
+						<a class="docs-primary-nav__link {% if node.url == page.url %}is-active is-current{% endif %}" href="{{ node.url | prepend: site.baseurl }}">
+              {% if node.layout == "landing" %}
+              <span class="docs-primary-nav__text">Overview</span>
+              {% else %}
+              {{ node.title }}
+              {% endif %}
+						</a>
+					</li>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+			</ul>
+		</li>
 
-    {% when 'page' %}
-    <li class="docs-primary-nav__item {% if page.url == node.url %}is-active{% endif %}">
-      <a href="#" class="docs-primary-nav__link" role="button" tabindex="0" aria-expanded="false">
-        <span class="docs-primary-nav__text">{{ node.title }}</span>
-      </a>
-    </li>
+		<li class="docs-primary-nav__item {% if page.url contains '/components' %}is-active{% endif %}">
+			<a class="docs-primary-nav__link js-nav-dropdown-trigger {% if page.url contains '/components' %}is-active  is-current{% endif %}" href="{{ "/components/" | prepend: site.baseurl }}">
+				<span class="docs-primary-nav__text">Components</span>
+				<svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
+					<use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
+				</svg>
+			</a>
+			<ul class="docs-primary-nav__sublist js-nav-dropdown {% assign post_index = '0' %}{% for node in site.pages %}{% if node.group == 'components' %}{% capture post_index %}{{ post_index | plus: '1' }}{% endcapture %}{% endif %}{% endfor %}{% if page.url contains '/components' %} is-active{% endif %}">
 
-    {% else %}
+				{% include navigation-item.html label='Blocks and cards' subgroup='blocks-and-cards' %}
 
-    {% endcase %} -->
+        {% include navigation-item.html label='Buttons' subgroup='buttons' %}
 
-  {% endfor %}
-  </ul>
+				{% include navigation-item.html label='Charts and graphs' subgroup='charts-and-graphs' %}
+
+        {% include navigation-item.html label='Form controls' subgroup='form-controls' %}
+
+				{% include navigation-item.html label='Headers and footers' subgroup='headers-and-footers' %}
+
+        {% include navigation-item.html label='Icons' subgroup='icons' %}
+
+        {% include navigation-item.html label='Interactive panels' subgroup='interactive' %}
+
+        {% include navigation-item.html label='Lists and collections' subgroup='lists-and-collections' %}
+
+        {% include navigation-item.html label='Media' subgroup='media' %}
+
+        {% include navigation-item.html label='Messaging' subgroup='messaging' %}
+
+        {% include navigation-item.html label='Navigation' subgroup='navigation' %}
+
+        {% include navigation-item.html label='Tables' subgroup='tables' %}
+
+        {% include navigation-item.html label='Text' subgroup='text' %}
+
+			</ul>
+		</li>
+
+    <li class="docs-primary-nav__item {% if page.url contains '/utilities/' %}is-active{% endif %}">
+			<a href="{{ "/utilities/index.html" | prepend: site.baseurl }}" class="docs-primary-nav__link js-nav-dropdown-trigger {% if page.url contains '/utilities' %}is-active  is-current{% endif %}">
+				<span class="docs-primary-nav__text">Utilities</span>
+				<svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
+					<use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
+				</svg>
+			</a>
+			<ul class="docs-primary-nav__sublist js-nav-dropdown {% if page.url contains '/utilities/' %} is-active{% endif %}">
+			{% for node in site.pages %}
+				{% if node.title %}
+					{% if node.group == "utilities" %}
+					<li class="docs-primary-nav__subitem">
+						<a class="docs-primary-nav__link {% if my_page.url == page.url %}is-active is-current{% endif %}" href="{{ my_page.url | prepend: site.baseurl }}">
+              {% if node.layout == "component-category" %}
+              <span class="docs-primary-nav__text">Overview</span>
+              {% else %}
+              {{ node.title }}
+              {% endif %}
+						</a>
+					</li>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+			</ul>
+		</li>
+
+		<li class="docs-primary-nav__item">
+			{% for node in site.pages %}
+				{% if node.url == "/page-templates/" %}
+				<a href="{{ '/page-templates/' | prepend: site.baseurl }}" class="docs-primary-nav__link {% if page.url == '/page-templates/' %}is-active is-current{% endif %}">
+					<span class="docs-primary-nav__text">Page templates</span>
+				</a>
+				{% endif %}
+			{% endfor %}
+		</li>
+
+		<li class="docs-primary-nav__item">
+			{% for node in site.pages %}
+				{% if node.url == "/downloads/" %}
+				<a href="{{ '/downloads/' | prepend: site.baseurl }}" class="docs-primary-nav__link {% if page.url == '/downloads/' %}is-active is-current{% endif %}">
+					<span class="docs-primary-nav__text">Downloads</span>
+				</a>
+				{% endif %}
+			{% endfor %}
+
+		</li>
+
+		<li class="docs-primary-nav__item">
+			{% for node in site.pages %}
+				{% if node.url == "/support/" %}
+				<a href="{{ '/support/' | prepend: site.baseurl }}" class="docs-primary-nav__link {% if page.url == '/support/' %}is-active is-current{% endif %}">
+					<span class="docs-primary-nav__text">Support</span>
+				</a>
+				{% endif %}
+			{% endfor %}
+		</li>
+
+		<li class="docs-primary-nav__item">
+			{% for node in site.pages %}
+				{% if node.url == "/contribute/" %}
+				<a href="{{ '/contribute/' | prepend: site.baseurl }}" class="docs-primary-nav__link {% if page.url == '/contribute/' %}is-active is-current{% endif %}">
+					<span class="docs-primary-nav__text">Contribute</span>
+				</a>
+				{% endif %}
+			{% endfor %}
+
+		</li>
+	</ul>
+
 </nav>

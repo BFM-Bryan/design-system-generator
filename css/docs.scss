@@ -10,6 +10,21 @@ html, body {
   padding: 0;
 }
 
+main {
+  display: flex;
+  margin-left: 18rem;
+}
+
+.docs-header {
+  position: fixed;
+  overflow: auto;
+  background-color: #eeeeee;
+  min-height: 100vh;
+  padding: 1rem;
+  height: 100vh;
+  width: 18rem;
+}
+
 .docs-icon {
   height: 1em;
   width: 1em;
@@ -25,29 +40,26 @@ html, body {
   flex-direction: column;
   align-items: flex-start;
 
-  position: absolute;
-
-  min-height: 100vh;
-  height: 100vh;
-  width: 18rem;
+  width: 100%;
 
   overflow: auto;
   z-index: $z-max;
 
-  .docs-primary-nav__list {
+  .docs-primary-nav__list,
+  .docs-primary-nav__sublist {
     display: block;
 
-    position: relative;
+    position: static;
 
     width: 100%;
     margin: 0;
     padding: 0;
 
-    .docs-primary-nav__item {
+    .docs-primary-nav__item,
+    .docs-primary-nav__subitem {
       margin: 0;
       padding: 0;
       list-style: none;
-
 
       .docs-primary-nav__link {
         display: flex;
@@ -65,9 +77,16 @@ html, body {
           outline: 1px dotted $color-black;
         }
 
-
+        &.docs-primary-nav__link {}
       }
     }
   }
+
+  .docs-primary-nav__sublist {
+    margin-left: 1rem;
+    width: auto;
+  }
+
+  .docs-primary-nav__subitem {}
 
 }

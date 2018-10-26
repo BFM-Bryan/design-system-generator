@@ -1,2 +1,22 @@
-<footer class="footer">
+<footer class="footer" role="contentinfo">
+  <ul class="">
+    <li class="">
+      <a href="{{ "/about.html" | prepend: site.baseurl }}" class="">About</a>
+    </li>
+    <li class="">
+      <a href="{{ "/roadmap.html" | prepend: site.baseurl }}" class="">Roadmap</a>
+    </li>
+    <li class="">
+      <a href="{{ "/release-history" | prepend: site.baseurl }}" class="">Release History</a>
+    </li>
+    <li class="">
+      <a href="{{ "/contribute.html" | prepend: site.baseurl }}" class="">Contribute</a>
+    </li>
+  </ul>
 </footer>
+
+<script src="{{ "/js/vendor/jquery-3.1.0.min.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/vendor/prism.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/vendor/iframe-resizer.min.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/vendor/clipboard.min.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/main.js" | prepend: site.baseurl }}"></script>

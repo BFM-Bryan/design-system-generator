@@ -1,0 +1,18 @@
+<ul class="docs-primary-nav__sublist js-nav-dropdown {% if page.subgroup == include.subgroup %} is-active{% endif %}">
+	{% for node in site.pages %}
+		{% if node.subgroup == include.subgroup and node.layout == "component-category" %}
+			<li class="docs-primary-nav__subitem {% if page.subgroup == include.subgroup %}is-active{% endif %}">
+				<a class="docs-primary-nav__link {% if node.url == page.url %}is-active is-current{% endif %}" href="{{ node.permalink | prepend: site.baseurl }}">Overview</a>
+			</li>
+		{% endif %}
+	{% endfor %}
+	{% for node in site.pages %}
+		{% if node.subgroup == include.subgroup and node.layout != "component-category" and node.status != "Planned" %}
+		<li class="docs-primary-nav__subitem {% if page.subgroup == include.subgroup %}is-active{% endif %}">
+      <a class="docs-primary-nav__link {% if my_subpage.url == page.url %}is-active is-current{% endif %}" href="{{ my_subpage.url | prepend: site.baseurl }}">
+    		{{ node.title }}
+			</a>
+		</li>
+		{% endif %}
+	{% endfor %}
+</ul>

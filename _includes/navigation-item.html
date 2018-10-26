@@ -1,0 +1,13 @@
+<li class="docs-primary-nav__subitem {% if page.subgroup == include.subgroup %}is-active{% endif %}">
+	<a class="docs-primary-nav__link {% if include.subgroup %}js-nav-dropdown-trigger{% endif %} {% if page.url == include.path %}is-active is-current{% endif %} {% if page.subgroup == include.subgroup %}is-active{% endif %}" href="{% if include.subgroup %}#{% else %}{{ include.path | prepend: site.baseurl}}{% endif %}">
+		<span class="">{{ include.label }}</span>
+		{% if include.subgroup %}
+		<svg class="docs-icon docs-primary-nav__icon" aria-hidden="true">
+			<use href="{{ "/icons.svg#chevron-right" | prepend: site.baseurl }}"></use>
+		</svg>
+		{% endif %}
+	</a>
+	{% if include.subgroup %}
+	{% include navigation-subitem.html subgroup=include.subgroup %}
+	{% endif %}
+</li>
